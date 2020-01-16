@@ -1,0 +1,20 @@
+{
+  "name": "herokuconnect",
+  "version": "1.0.0",
+  "description": "Connect nodejs with postgresql on heroku",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ayushthakkur1701"
+  },
+  "author": "ayush",
+  "license": "ISC",
+  "dependencies": {
+    "cool-ascii-faces": "^1.3.4",
+    "express": "^4.17.1",
+    "pg": "^7.17.1"
+  }
+}
