@@ -1,11 +1,20 @@
+const cool = require('cool-ascii-faces')
+const express = require('express')
+const path = require('path')
+const PORT = process.env.PORT || 5000
 const { Pool } = require('pg');
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: "postgres://sfcpeekvukohax:f48ca5c761b2681978e877f787b38ea8ee2df6d11aafbaca10da930374276bdf@ec2-54-225-116-36.compute-1.amazonaws.com:5432/dfu22kdkgouqri",
   ssl: true
 });
 
 express()
-.get('/db', async (req, res) => {
+.use(express.static(path.join(__dirname, 'public')))
+  .set('views', path.join(__dirname, 'views'))
+  .set('view engine', 'ejs')
+  .get('/', (req, res) => res.render('pages/index'))
+  .get('/cool', (req, res) => res.send(cool()))
+  .get('/db', async (req, res) => {
     try {
       const client = await pool.connect()
       const result = await client.query('SELECT * FROM test_table');
@@ -17,3 +26,4 @@ express()
       res.send("Error " + err);
     }
   })
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`))
